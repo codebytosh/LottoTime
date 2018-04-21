@@ -8,70 +8,85 @@
 
 import Foundation
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class Lotto649ViewController: UIViewController {
     
-    
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     //TODO: API and Variables
-    
+
     let futureURL = "https://www.magayo.com/api/jackpot.php?api_key=fnx9TYfC7kHd47qmBJ&game=ca_lotto_649"
-    
+
     let pastURL = "https://www.magayo.com/api/results.php?api_key=fnx9TYfC7kHd47qmBJ&game=ca_lotto_649"
-    
+
     var jackpot = ""
     var futureDraw = ""
-    
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     //TODO: Setup IBOutlets
-    
-    @IBOutlet weak var priceTag: UILabel!
-    @IBOutlet weak var winningNumbersTag: UILabel!
-    @IBOutlet weak var nextDraw: UILabel!
-    @IBOutlet weak var lastDraw: UILabel!
-    
+
+//    @IBOutlet weak var priceTag: UILabel!
+//    @IBOutlet weak var winningNumbersTag: UILabel!
+//    @IBOutlet weak var nextDraw: UILabel!
+//    @IBOutlet weak var lastDraw: UILabel!
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
+
     //TODO: Overide
-    
+
     override func viewDidLoad() {
-        
+
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    //TODO: Networking
-    
-    //Get Jackpot and next draw value
-    
-    func getFutureData (url: String) {
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //TODO: Networking
+
+    //Get Jackpot and next draw value
+
+    func getFutureData (url: String) {
+
+        Alamofire.request(url, method: .get).responseJSON { response in
+            if response.result.isSuccess {
+
+                print("Sucess! Got data")
+
+                let futureJSON : JSON = JSON(response.result.value!)
+
+                print(futureJSON)
+            }
+
+        }
+    }
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -97,4 +112,4 @@ class Lotto649ViewController: UIViewController {
     
     
     
-}
+
